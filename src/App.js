@@ -75,7 +75,8 @@ function App() {
     show: false,
     text: '',
     x: 0,
-    y: 0
+    y: 0,
+    type: ''
   });
 
   // Handle chart hover
@@ -86,9 +87,10 @@ function App() {
     
     setTooltip({
       show: true,
-      text: `${segmentType}: ${value.toLocaleString()}`,
+      text: `${segmentType}: ${Math.round(value).toLocaleString()}`,
       x: x + 10,
-      y: y - 10
+      y: y - 10,
+      type: segmentType
     });
   };
 
@@ -97,7 +99,8 @@ function App() {
       show: false,
       text: '',
       x: 0,
-      y: 0
+      y: 0,
+      type: ''
     });
   };
 
@@ -513,6 +516,8 @@ function App() {
           </div>
         </section>
 
+        
+
         <section className="separator-section">
           <div className="separator-content">
             <div className="separator-text">
@@ -554,7 +559,6 @@ function App() {
             <div className="yellow-stripes"></div>
           </div>
         </section>
-
         {/* EMI Calculator Section */}
         <section className="emi-calculator-section">
           <div className="emi-calculator-container">
@@ -571,15 +575,15 @@ function App() {
                 <div className="loan-summary-bar">
                   <div className="summary-item">
                     <span className="summary-label">Monthly EMI</span>
-                    <span className="summary-value">₹{(donutChartData?.monthlyEMI || 0).toLocaleString()}</span>
+                    <span className="summary-value">₹{Math.round(donutChartData?.monthlyEMI || 0).toLocaleString()}</span>
                   </div>
                   <div className="summary-item">
                     <span className="summary-label">Total Interest</span>
-                    <span className="summary-value">₹{(donutChartData?.totalInterest || 0).toLocaleString()}</span>
+                    <span className="summary-value">₹{Math.round(donutChartData?.totalInterest || 0).toLocaleString()}</span>
                   </div>
                   <div className="summary-item">
                     <span className="summary-label">Total Payable</span>
-                    <span className="summary-value">₹{(donutChartData?.totalPayable || 0).toLocaleString()}</span>
+                    <span className="summary-value">₹{Math.round(donutChartData?.totalPayable || 0).toLocaleString()}</span>
                   </div>
                 </div>
                 
@@ -652,11 +656,11 @@ function App() {
                         <div className="interest-input">
                           <input 
                             type="number" 
-                            value={emiCalculator.interestRate} 
+                            value={Math.round(emiCalculator.interestRate)} 
                             onChange={(e) => handleEMIInputChange('interestRate', e.target.value)}
                             min="7" 
                             max="15"
-                            step="0.1"
+                            step="1"
                           />
                           <span className="percent-symbol">%</span>
                         </div>
@@ -666,11 +670,12 @@ function App() {
                           type="range" 
                           min="7" 
                           max="15" 
-                          value={emiCalculator.interestRate}
+                          value={Math.round(emiCalculator.interestRate)}
                           onChange={(e) => handleEMIInputChange('interestRate', e.target.value)}
-                          step="0.1"
+                          className="slider"
+                          step="1"
                           style={{
-                            '--fill-percentage': `${((emiCalculator.interestRate - 7) / (15 - 7)) * 100}%`
+                            '--fill-percentage': `${((Math.round(emiCalculator.interestRate) - 7) / (15 - 7)) * 100}%`
                           }}
                         />
                         <div className="slider-labels">
@@ -726,7 +731,7 @@ function App() {
                       {/* Tooltip */}
                       {tooltip.show && (
                         <div 
-                          className="chart-tooltip show"
+                          className={`chart-tooltip show ${tooltip.type === 'Total Payable' ? 'yellow-tooltip' : 'blue-tooltip'}`}
                           style={{
                             left: tooltip.x,
                             top: tooltip.y
@@ -752,7 +757,6 @@ function App() {
             </div>
           </div>
         </section>
-
         
 
         <section id="eligibility" className="cta">
