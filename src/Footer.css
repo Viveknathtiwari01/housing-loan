@@ -1,0 +1,107 @@
+/* Main Footer Styling */
+.site-footer {
+  background-color: #f0f2f5; /* Light grey background */
+  padding: 25px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #555;
+  font-size: 15px;
+  border-top: 1px solid #e0e4e8;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Top Section */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #dfe3e7;
+}
+
+.copyright-text {
+  margin: 0;
+  color: #333;
+}
+
+.footer-links a {
+  color: #555;
+  text-decoration: none;
+  margin: 0 12px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #000;
+}
+
+/* Social Media Icons */
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #0056b3; /* Blue background */
+  color: #ffc107; /* White icon */
+  font-size: 16px;
+  text-decoration: none;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-2px);
+  background-color: #004494; /* Darker blue on hover */
+}
+
+/* Bottom Section */
+.footer-bottom {
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.footer-bottom strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .copyright-text {
+    order: 3; /* Move copyright to the bottom */
+  }
+
+  .footer-links {
+    order: 1;
+  }
+
+  .social-icons {
+    order: 2;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+}
